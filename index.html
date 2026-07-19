@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الناظر للكهرباء</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #0a1628;
+            --gold: #f5b81b;
+            --gold-dark: #c9920a;
+            --gold-light: #ffe792;
+            --gray-bg: #f0f2f7;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Tahoma', 'Segoe UI', Arial, sans-serif;
+            background: var(--gray-bg);
+            overflow-x: hidden;
+        }
+
+        /* ===== شريط علوي ===== */
+        .top-bar {
+            background: var(--primary);
+            color: #b0c4d9;
+            padding: 8px 0;
+            font-size: 13px;
+            position: relative;
+            z-index: 10;
+        }
+        .top-bar a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .top-bar a:hover {
+            color: #fff;
+        }
+        .top-bar .social-icons a {
+            color: #b0c4d9;
+            margin: 0 6px;
+            font-size: 16px;
+        }
+        .top-bar .social-icons a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== الهيدر ===== */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+            padding: 12px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .navbar-custom .navbar-brand {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .navbar-custom .navbar-brand span {
+            color: var(--gold);
+        }
+        .navbar-custom .navbar-brand i {
+            color: var(--gold);
+            margin-left: 8px;
+        }
+        .btn-gold {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 10px 30px;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-gold:hover {
+            background: var(--gold-dark);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 184, 27, 0.4);
+        }
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            padding: 10px 35px;
+            font-weight: 700;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 184, 27, 0.3);
+        }
+
+        /* ===== هيرو بصورة المحل خلفية ===== */
+        .hero-shop {
+            background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(26, 48, 80, 0.75) 100%),
+                url('Ror/shop1.png') center/cover no-repeat;
+            padding: 80px 0 60px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+        }
+        .hero-shop::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--gray-bg), transparent);
+            pointer-events: none;
+        }
+        .hero-shop .container {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-shop h1 {
+            font-size: 58px;
+            font-weight: 900;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+        .hero-shop h1 span {
+            color: var(--gold);
+        }
+        .hero-shop .subtitle {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+        }
+        .hero-shop .subtitle i {
+            margin-left: 10px;
+        }
+
+        /* ===== مميزات تحت الهيدر ===== */
+        .features-bar {
+            background: #fff;
+            padding: 25px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+            position: relative;
+            z-index: 3;
+            margin-top: -30px;
+            border-radius: 20px 20px 0 0;
+        }
+        .features-bar .feature-item {
+            text-align: center;
+            padding: 10px 15px;
+        }
+        .features-bar .feature-item i {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .features-bar .feature-item h6 {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        .features-bar .feature-item p {
+            font-size: 13px;
+            color: #7a8a9e;
+            margin-bottom: 0;
+        }
+
+        /* ===== قسم المنتجات ===== */
+        .section-title {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+        .section-title span {
+            color: var(--gold);
+        }
+
+        /* ===== شبكة المنتجات ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .product-item {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        .product-item.show {
+            display: block;
+        }
+        .product-item.hidden {
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transition: 0.4s;
+            transform-origin: right;
+        }
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+            border-color: var(--gold);
+        }
+        .product-card .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #f8f9fc;
+            margin-bottom: 10px;
+        }
+        .product-card .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: 0.5s;
+        }
+        .product-card:hover .img-wrapper img {
+            transform: scale(1.1);
+        }
+        .product-card .product-number {
+            font-size: 12px;
+            color: #aaa;
+            font-weight: 600;
+            background: #f0f2f7;
+            padding: 3px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .product-card .hover-info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(10, 22, 40, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: 0.4s;
+            border-radius: 0 0 20px 20px;
+        }
+        .product-card:hover .hover-info {
+            transform: translateY(0);
+        }
+        .product-card .hover-info .btn-inquire {
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .product-card .hover-info .btn-inquire:hover {
+            background: #fff;
+            color: var(--primary);
+        }
+
+        /* ===== زر عرض الكل ===== */
+        .show-all-wrapper {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        /* ===== أزرار التواصل ===== */
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .contact-btn {
+            padding: 14px 30px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-btn i {
+            font-size: 22px;
+        }
+        .contact-btn:hover {
+            transform: translateY(-4px);
+            color: #fff;
+        }
+        .contact-btn.whatsapp {
+            background: #25d366;
+        }
+        .contact-btn.whatsapp:hover {
+            background: #1da851;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+        .contact-btn.phone {
+            background: #007aff;
+        }
+        .contact-btn.phone:hover {
+            background: #005ecf;
+            box-shadow: 0 8px 30px rgba(0, 122, 255, 0.4);
+        }
+        .contact-btn.facebook {
+            background: #1877f2;
+        }
+        .contact-btn.facebook:hover {
+            background: #0e5fc7;
+            box-shadow: 0 8px 30px rgba(24, 119, 242, 0.4);
+        }
+
+        /* ===== الخريطة ===== */
+        .map-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+            max-width: 900px;
+            margin: 0 auto;
+            height: 350px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== الفوتر ===== */
+        .footer-custom {
+            background: var(--primary);
+            color: #b0c4d9;
+            padding: 35px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-custom h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .footer-custom a {
+            color: #b0c4d9;
+            text-decoration: none;
+            transition: 0.3s;
+            margin: 3px 0;
+            font-size: 14px;
+        }
+        .footer-custom a:hover {
+            color: var(--gold);
+        }
+        .footer-custom .social-icons a {
+            font-size: 24px;
+            margin: 0 8px;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .footer-custom .social-icons a:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+        .footer-bottom {
+            border-top: 1px solid #2a3a4a;
+            padding-top: 18px;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ===== نافذة منبثقة ===== */
+        .modal-img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: contain;
+        }
+        .modal-content {
+            border-radius: 24px;
+            border: none;
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 768px) {
+            .hero-shop {
+                min-height: 350px;
+                padding: 60px 0 40px;
+            }
+            .hero-shop h1 {
+                font-size: 36px;
+            }
+            .hero-shop .subtitle {
+                font-size: 18px;
+            }
+            .features-bar {
+                margin-top: -20px;
+                padding: 15px 0;
+            }
+            .features-bar .feature-item i {
+                font-size: 24px;
+            }
+            .features-bar .feature-item h6 {
+                font-size: 13px;
+            }
+            .features-bar .feature-item p {
+                font-size: 11px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 14px;
+            }
+            .contact-btn {
+                padding: 12px 22px;
+                font-size: 15px;
+            }
+            .map-container {
+                height: 250px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-shop h1 {
+                font-size: 28px;
+            }
+            .hero-shop .subtitle {
+                font-size: 15px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            .product-card {
+                padding: 10px;
+                border-radius: 14px;
+            }
+            .features-bar .feature-item {
+                padding: 5px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== شريط علوي ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+201225245522">+201225245522</a>
+                    <i class="fas fa-whatsapp me-2 ms-3"></i>
+                    <a href="https://wa.me/201225245522" target="_blank">واتساب</a>
+                </div>
+                <div class="col-md-6 text-center text-md-end social-icons">
+                    <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/201225245522" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== الهيدر ===== -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-bolt"></i> الناظر <span>للكهرباء</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#products">المنتجات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
+                </ul>
+                <a href="https://wa.me/201225245522" target="_blank" class="btn btn-gold">
+                    <i class="fas fa-headset"></i> خدمة العملاء
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== هيرو بصورة المحل خلفية ===== -->
+    <section class="hero-shop">
+        <div class="container">
+            <h1>الناظر <span>للكهرباء</span></h1>
+            <div class="subtitle">
+                <i class="fas fa-tags"></i> بيع بسعر الجملة
+                <i class="fas fa-bolt mx-3" style="color: #fff; opacity: 0.5;"></i>
+                <i class="fas fa-check-circle"></i> ضمان الجودة
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== مميزات ===== -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="row g-2">
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <i class="fas fa-truck"></i>
+                        <h6>توصيل سريع</h6>
+                        <p>توصيل في نفس اليوم</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h6>ضمان الجودة</h6>
+                        <p>جميع المنتجات أصلية</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <h6>دعم فني</h6>
+                        <p>استشارات مجانية</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <i class="fas fa-tags"></i>
+                        <h6>خصومات الجملة</h6>
+                        <p>أسعار تنافسية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== المنتجات ===== -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">منتجاتنا <span>الأصلية</span></h2>
+
+            <div class="product-grid" id="productGrid">
+                <!-- سيتم تعبئتها بواسطة JavaScript -->
+            </div>
+
+            <div class="show-all-wrapper">
+                <button class="btn-outline-gold" id="showAllBtn">
+                    <i class="fas fa-plus-circle"></i> عرض الكل
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== التواصل ===== -->
+    <section id="contact" class="py-5" style="background: #fff;">
+        <div class="container">
+            <h2 class="section-title text-center">تواصل <span>معنا</span></h2>
+
+            <!-- أزرار التواصل -->
+            <div class="contact-buttons">
+                <a href="https://wa.me/201225245522" target="_blank" class="contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> واتساب
+                </a>
+                <a href="tel:+201225245522" class="contact-btn phone">
+                    <i class="fas fa-phone-alt"></i> اتصل بنا
+                </a>
+                <a href="https://facebook.com/yourpage" target="_blank" class="contact-btn facebook">
+                    <i class="fab fa-facebook-f"></i> فيسبوك
+                </a>
+            </div>
+
+            <!-- الخريطة -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15135.562705490618!2d32.7415556!3d25.8998333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1700000000000" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="text-center mt-3 text-muted small">
+                <i class="fas fa-map-marker-alt"></i> 25°53'59.4"N 32°44'29.6"E
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== الفوتر ===== -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-bolt" style="color: var(--gold);"></i> الناظر للكهرباء</h5>
+                    <p style="font-size: 14px;">وكيل معتمد لأكبر ماركات المعدات الكهربائية منذ ٢٠٠٠. نقدم أفضل الأسعار والجودة لعملائنا.</p>
+                    <div class="social-icons mt-2">
+                        <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/201234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>روابط سريعة</h5>
+                    <a href="#products">المنتجات</a><br />
+                    <a href="#contact">اتصل بنا</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>معلومات التواصل</h5>
+                    <p style="font-size: 14px;"><i class="fas fa-phone" style="color: var(--gold);"></i> +201225245522</p>
+                    <p style="font-size: 14px;"><i class="fab fa-whatsapp" style="color: var(--gold);"></i> +201225245522</p>
+                    <p style="font-size: 14px;"><i class="fas fa-map-marker-alt" style="color: var(--gold);"></i> قنا-قوص-الشعراني-بجوار ملعب الشعراني</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 <strong>الناظر للكهرباء</strong> - جميع الحقوق محفوظة
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== نافذة منبثقة ===== -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content rounded-4">
+                <div class="modal-body text-center p-4">
+                    <img src="" id="modalProductImg" class="modal-img mb-3" alt="منتج" />
+                    <h5 id="modalProductName" class="fw-bold"></h5>
+                    <a href="https://wa.me/201225245522" target="_blank" class="btn btn-gold w-100 mt-2">
+                        <i class="fab fa-whatsapp"></i> استفسر عن السعر
+                    </a>
+                    <button class="btn btn-outline-secondary w-100 mt-2" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Bootstrap JS ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // =============================================
+        // المنتجات (37 منتج)
+        // =============================================
+        const totalProducts = 37;
+        const products = [];
+        for (let i = 1; i <= totalProducts; i++) {
+            products.push({
+                id: i,
+                img: `Ror/product${i}.jpg`
+            });
+        }
+
+        // =============================================
+        // عرض المنتجات (أول 24 ثم الباقي)
+        // =============================================
+        const productGrid = document.getElementById('productGrid');
+        const showAllBtn = document.getElementById('showAllBtn');
+        let showAll = false;
+        const initialCount = 24;
+
+        function renderProducts() {
+            const count = showAll ? products.length : initialCount;
+            const visible = products.slice(0, count);
+
+            productGrid.innerHTML = visible.map(p => `
+                    <div class="product-item show" style="animation-delay: ${(p.id - 1) * 0.03}s">
+                        <div class="product-card" data-bs-toggle="modal" data-bs-target="#productModal"
+                             data-img="${p.img}" data-name="منتج رقم ${p.id}">
+                            <div class="img-wrapper">
+                                <img src="${p.img}" alt="منتج ${p.id}" 
+                                     onerror="this.src='https://via.placeholder.com/300/f5b81b/0a1628?text=منتج+${p.id}'" />
+                            </div>
+                            <span class="product-number">#${p.id}</span>
+                            <div class="hover-info">
+                                <button class="btn-inquire" onclick="event.stopPropagation(); window.open('https://wa.me/201234567890?text=استفسار عن سعر منتج رقم ${p.id}','_blank')">
+                                    <i class="fab fa-whatsapp"></i> استفسر عن السعر
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            if (showAll) {
+                showAllBtn.innerHTML = '<i class="fas fa-minus-circle"></i> عرض أقل';
+            } else {
+                showAllBtn.innerHTML = '<i class="fas fa-plus-circle"></i> عرض الكل (' + (products.length - initialCount) +
+                    ' منتج متبقي)';
+            }
+        }
+
+        // =============================================
+        // زر عرض الكل
+        // =============================================
+        showAllBtn.addEventListener('click', function() {
+            showAll = !showAll;
+            renderProducts();
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // =============================================
+        // المودال
+        // =============================================
+        const modal = document.getElementById('productModal');
+        modal.addEventListener('show.bs.modal', function(event) {
+            const card = event.relatedTarget;
+            const img = card.dataset.img;
+            const name = card.dataset.name;
+            document.getElementById('modalProductName').textContent = name;
+            const imgEl = document.getElementById('modalProductImg');
+            imgEl.src = img;
+            imgEl.onerror = function() {
+                this.src = 'https://via.placeholder.com/400/f5b81b/0a1628?text=' + encodeURIComponent(name);
+            };
+        });
+
+        // =============================================
+        // تشغيل
+        // =============================================
+        renderProducts();
+
+        console.log('⚡ الناظر للكهرباء - تم تحميل الموقع بنجاح!');
+        console.log('📁 ضع صور المنتجات في مجلد Ror: product1.jpg إلى product37.jpg');
+        console.log('📁 ضع صورة المحل في مجلد Ror: shop1.png');
+        console.log('📍 الموقع: 25°53\'59.4"N 32°44\'29.6"E');
+    </script>
+
+</body>
+</html>
